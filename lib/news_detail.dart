@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:republika/model.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetail extends StatelessWidget {
@@ -12,6 +13,7 @@ class NewsDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("News Detail"),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -27,11 +29,23 @@ class NewsDetail extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
+              const SizedBox(
+                height: 15,
+              ),
               Text(
-                post.pubDate.toString(),
+                DateFormat('EEEE, d MMM yyyy').format(post.pubDate),
+              ),
+              const SizedBox(
+                height: 15,
               ),
               Image.network(post.thumbnail),
+              const SizedBox(
+                height: 15,
+              ),
               Text(post.description),
+              const SizedBox(
+                height: 15,
+              ),
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(

@@ -15,7 +15,7 @@ class Home extends StatelessWidget {
                 "https://static.republika.co.id/files/images/logo.png",
               ),
               const SizedBox(
-                height: 10,
+                height: 40,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
