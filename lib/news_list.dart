@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:republika/model.dart';
+import 'package:republika/news_detail.dart';
 
 class NewsList extends StatefulWidget {
   final String category;
@@ -14,7 +15,7 @@ class NewsList extends StatefulWidget {
 class _NewsListState extends State<NewsList> {
   List<Post> posts = [];
 
-  Future _getData() async {
+  Future getData() async {
     var response = await http.get(
       Uri.parse(
         "https://api-berita-indonesia.vercel.app/republika/${widget.category.toLowerCase()}",
@@ -34,7 +35,7 @@ class _NewsListState extends State<NewsList> {
         centerTitle: true,
       ),
       body: FutureBuilder(
-        future: _getData(),
+        future: getData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(
@@ -45,6 +46,16 @@ class _NewsListState extends State<NewsList> {
               itemCount: posts.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewsDetail(
+                          post: posts[index],
+                        ),
+                      ),
+                    );
+                  },
                   child: Card(
                     child: Row(
                       children: [
